@@ -13,4 +13,4 @@ Also, if you want to contribute, you can open a pull request, so then this can s
 I have no currently planned release date, however I do hope to release it before Fall 2022;
 I don't know how long this will take, and it is still **VERY** early in development.
 ### How will I download it when it comes out?
-I will have an installer available under the releases page when it comes out, and maybe a test build for playtesting
+I will have an installer available under the releases page when it comes out, and maybe a test build for playtesting every now and then.
