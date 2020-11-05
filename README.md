@@ -1,4 +1,4 @@
-# Project-V
+# Project V
 Project V is the code name for the game I'm working on, it was suggested on my Discord server in Febuary,
 and I've been working on it off and on ever since.
 The main concept is that you are an anti-virus program in a computer trying to stop virus,
