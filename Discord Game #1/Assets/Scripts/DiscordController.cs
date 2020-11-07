@@ -14,7 +14,7 @@ public class DiscordController : MonoBehaviour
     {
         var levelData = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
-        string discordAppId = System.IO.File.ReadAllText("Secrets/DISCORD_APP_ID.secret");
+        string discordAppId = Utils.GetSecret("DISCORD_APP_ID");
         discord = new Discord.Discord(long.Parse(discordAppId), (System.UInt64)Discord.CreateFlags.Default);
         userManager = discord.GetUserManager();
         activityManager = discord.GetActivityManager();
