@@ -37,12 +37,6 @@ public class Console : MonoBehaviour
         AddToConsole(string.Format("(user)@(pc):{0} ", cd));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ProcessCommand(string input)
     {
         string output;
