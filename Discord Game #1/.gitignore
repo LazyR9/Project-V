@@ -61,3 +61,4 @@ crashlytics-build.properties
 
 # I don't need the original icon files, just the exported ones
 *.pspimage
+*.pspimage.meta
