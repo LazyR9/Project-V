@@ -84,6 +84,11 @@ public class Console : MonoBehaviour
         AddToConsole(line.ToString() + "\n");
     }
 
+    public void OnButtonClick()
+    {
+        gameObject.SetActive(!gameObject.activeInHierarchy);
+    }
+
     void OnEnable()
     {
         controls.UI.Enable();
