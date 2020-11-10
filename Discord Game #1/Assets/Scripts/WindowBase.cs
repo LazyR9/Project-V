@@ -187,8 +187,8 @@ public class WindowBase : MonoBehaviour
 			maxWidth = Screen.width - 100;
 			maxHeight = Screen.height - 100;
 			screenSize = new Vector2(Screen.width, Screen.height);
-			OnTopLeftResize(Vector2.zero);
-			OnBottomRightResize(Vector2.zero);
+			OnTopLeftResize(Vector2.one);
+			OnBottomRightResize(Vector2.one);
 		}
 	}
 	public void OnDrag(PointerEventData eventData)
