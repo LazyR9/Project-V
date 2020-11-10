@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Console : MonoBehaviour
 {
     public string cd = "$";
 
     string consoleHistory = "";
-    InputField inputField;
+    TMP_InputField inputField;
 
     ProjectV controls;
     public GameManager gameManager;
@@ -33,7 +33,7 @@ public class Console : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inputField = GetComponentInChildren<InputField>();
+        inputField = GetComponentInChildren<TMP_InputField>();
         AddToConsole(string.Format("(user)@(pc):{0} ", cd));
     }
 
@@ -57,6 +57,7 @@ public class Console : MonoBehaviour
         } catch (Exception e)
         {
             output = "An error occurred: " + e.Message;
+            Debug.LogError(e);
         }
 
         AddToConsole(output);
