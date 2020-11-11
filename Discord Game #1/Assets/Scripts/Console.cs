@@ -16,6 +16,8 @@ public class Console : MonoBehaviour
     ProjectV controls;
     public GameManager gameManager;
 
+    WindowBase windowBase;
+
     void Awake()
     {
         controls = gameManager.controls;
@@ -28,13 +30,6 @@ public class Console : MonoBehaviour
                 ProcessCommand(command);
             }
         };
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        inputField = GetComponentInChildren<TMP_InputField>();
-        AddToConsole(string.Format("(user)@(pc):{0} ", cd));
     }
 
     public void ProcessCommand(string input)
@@ -54,10 +49,11 @@ public class Console : MonoBehaviour
         try
         {
             output = (string)commandMethod.Invoke(commands, new object[1]{args.ToArray()});
-        } catch (Exception e)
+        }
+        catch
         {
-            output = "An error occurred: " + e.Message;
-            Debug.LogError(e);
+            output = "Unknow command: " + commandName.ToLower();
+            output += "\nPlease type \"help\" for a list of commands.";
         }
 
         AddToConsole(output);
@@ -66,6 +62,8 @@ public class Console : MonoBehaviour
 
     private void AddToConsole(string message)
     {
+        inputField.caretPosition = inputField.text.Length;
+
         inputField.text += message;
         consoleHistory += message;
     }
@@ -91,12 +89,24 @@ public class Console : MonoBehaviour
 
     void OnEnable()
     {
+        inputField = GetComponentInChildren<TMP_InputField>();
+        windowBase = GetComponent<WindowBase>();
+
+        transform.localPosition = Vector3.zero;
+        Vector2 newSize = new Vector2(windowBase.maxWidth - 100, windowBase.maxHeight - 100);
+        GetComponent<RectTransform>().sizeDelta = newSize;
+
+        inputField.text = "";
+        AddToConsole(string.Format("(user)@(pc):{0} ", cd));
+
         controls.UI.Enable();
         controls.Player.Disable();
     }
 
     void OnDisable()
     {
+        consoleHistory = "";
+
         controls.UI.Disable();
         controls.Player.Enable();
     }
