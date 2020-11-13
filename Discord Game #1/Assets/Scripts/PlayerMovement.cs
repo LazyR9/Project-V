@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public float runSpeed = 40f;
     public Animator animator;
-    public GameObject console;
     public GameManager gameManager;
     float horizontalMove = 0;
     bool jump = false;
@@ -19,20 +18,14 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Jump.performed += ctx => jump = true;
         controls.Player.Move.performed += ctx =>
         {
-            if (!console.activeInHierarchy)
-            {
-                horizontalMove = ctx.ReadValue<Vector2>().x * runSpeed;
-                animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-            }
+            horizontalMove = ctx.ReadValue<Vector2>().x * runSpeed;
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         };
 
         controls.Player.Move.canceled += ctx =>
         {
-            if (!console.activeInHierarchy)
-            {
-                horizontalMove = 0;
-                animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-            }
+            horizontalMove = 0;
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         };
     }
 
