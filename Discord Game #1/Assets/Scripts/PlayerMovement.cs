@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     ProjectV controls;
 
-    void Awake()
+    void Start()
     {
         controls = gameManager.controls;
 
@@ -27,12 +27,6 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove = 0;
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         };
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void FixedUpdate()
