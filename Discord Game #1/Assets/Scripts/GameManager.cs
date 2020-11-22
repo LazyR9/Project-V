@@ -14,8 +14,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LevelManager levelData = GameObject.FindObjectOfType<LevelManager>();
-        Debug.Log("Level Info | Level Name: " + levelData.levelName + " | Player Health: " + levelData.playerHealth.ToString() + " | Is Multiplayer? " + levelData.isMultiplayer.ToString());
+        if (GameObject.Find("LevelManager"))
+        {
+            LevelManager levelData = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+            Debug.Log("Level Info | Level Name: " + levelData.levelName + " | Player Health: " + levelData.playerHealth.ToString() + " | Is Multiplayer? " + levelData.isMultiplayer.ToString());
+        }
     }
 
     // Update is called once per frame

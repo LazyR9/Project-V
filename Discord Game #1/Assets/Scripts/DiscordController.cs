@@ -7,12 +7,19 @@ public class DiscordController : MonoBehaviour
     public UserManager userManager;
     public ActivityManager activityManager;
     public LobbyManager lobbyManager;
+    Discord.Activity activity;
     string state;
+    string details;
 
     // Start is called before the first frame update
     void Start()
     {
-        var levelData = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        LevelManager levelData = null;
+
+        if (GameObject.Find("LevelManager"))
+        {
+            levelData = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        }
 
         string discordAppId = Utils.GetSecret("DISCORD_APP_ID");
         discord = new Discord.Discord(long.Parse(discordAppId), (System.UInt64)Discord.CreateFlags.Default);
@@ -30,32 +37,34 @@ public class DiscordController : MonoBehaviour
             Debug.Log(currentUser.Id);
         };
 
-        if (levelData.isMultiplayer)
+        if (levelData)
         {
-            state = "In a multiplayer game with (User)"; // Fetch the User here somehow, no multiplayer system is in place yet anyway
-        }
-        else
-        {
-            //state = "Playing a test build";
-            state = "In a singleplayer game";
-        }
 
-        var activity = new Discord.Activity
-        {
-            State = state,
-            Details = "Currently on: " + levelData.levelName
-        };
-        activityManager.UpdateActivity(activity, (result) =>
-        {
-            if (result == Discord.Result.Ok)
+            if (levelData.isMultiplayer)
             {
-                Debug.Log("Succeeded to update activity!");
+                state = "In a multiplayer game with (User)"; // Fetch the User here somehow, no multiplayer system is in place yet anyway
+            
             }
             else
             {
-                Debug.Log("Failed to update activity");
+                //state = "Playing a test build";
+                state = "In a singleplayer game";
             }
-        });
+            details = "Currently on: " + levelData.levelName;
+            
+            activity = new Discord.Activity
+            {
+                State = state,
+                Details = details
+            };
+            
+            UpdateActivity(activity);
+        }
+        else
+        {
+            GameObject.Find("DiscordData").GetComponent<DiscordData>().RefeshActivity();
+        }
+
 
         /*
         var txn = lobbyManager.GetLobbyCreateTransaction();
@@ -96,6 +105,21 @@ public class DiscordController : MonoBehaviour
         Debug.Log("Game is closing!");
     }
 
+    public void UpdateActivity(Discord.Activity activity)
+    {
+        activityManager.UpdateActivity(activity, (result) =>
+        {
+            if (result == Discord.Result.Ok)
+            {
+                Debug.Log("Succeeded to update activity!");
+            }
+            else
+            {
+                Debug.LogError("Failed to update activity: " + result);
+            }
+        });
+    }
+
     public void ClearActivity()
     {
         activityManager.ClearActivity((result) =>
@@ -106,7 +130,7 @@ public class DiscordController : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Failed to clear activity: " + result.ToString());
+                Debug.LogError("Failed to clear activity: " + result);
                 ClearActivity();
             }
         });
