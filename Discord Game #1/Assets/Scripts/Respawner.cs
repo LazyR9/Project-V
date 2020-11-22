@@ -9,7 +9,7 @@ public class Respawner : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
 
-        if (player.position.y < this.transform.position.y)
+        if (player.position.y < transform.position.y)
         {
             int countLoaded = SceneManager.sceneCount;
             Scene[] loadedScenes = new Scene[countLoaded];
