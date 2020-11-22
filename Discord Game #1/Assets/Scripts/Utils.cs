@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class Utils
 {
+    static bool isCoroutineExecuting = false;
+
     public static string GetSecret(string secretName)
     {   
         try
@@ -27,5 +30,15 @@ public static class Utils
             }
         }
         return null;
+    }
+
+    public static IEnumerator ExecuteAfterTime(float time, Action task)
+    {
+        if (isCoroutineExecuting)
+            yield break;
+        isCoroutineExecuting = true;
+        yield return new WaitForSeconds(time);
+        task();
+        isCoroutineExecuting = false;
     }
 }
