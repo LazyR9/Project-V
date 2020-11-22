@@ -11,9 +11,12 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
-        mainCamera = GameObject.Find("CM vcam1").transform;
-        CVC = mainCamera.GetComponent<CinemachineVirtualCamera>();
         player.position = transform.position;
-        CVC.OnTargetObjectWarped(player, player.position - mainCamera.position);
+        if (GameObject.Find("CM vcam1"))
+        {
+            mainCamera = GameObject.Find("CM vcam1").transform;
+            CVC = mainCamera.GetComponent<CinemachineVirtualCamera>();
+            CVC.OnTargetObjectWarped(player, player.position - mainCamera.position);
+        }
     }
 }
