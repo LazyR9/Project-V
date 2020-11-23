@@ -8,7 +8,8 @@ using TMPro;
 
 public class Console : MonoBehaviour
 {
-    public string cd = "$";
+    LevelManager levelManager;
+    public Directory cd;
 
     string consoleHistory = "";
     TMP_InputField inputField;
@@ -57,7 +58,7 @@ public class Console : MonoBehaviour
         }
 
         AddToConsole(output);
-        AddToConsole(string.Format("\n(user)@(pc):{0} ", cd));
+        AddToConsole(string.Format("\n{0}@({1}: {2} ", levelManager.user, levelManager.pcName, cd));
     }
 
     private void AddToConsole(string message)
@@ -89,6 +90,9 @@ public class Console : MonoBehaviour
 
     void OnEnable()
     {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        cd = levelManager.defaultDirectory;
+
         inputField = GetComponentInChildren<TMP_InputField>();
         windowBase = GetComponent<WindowBase>();
 
@@ -97,7 +101,7 @@ public class Console : MonoBehaviour
         GetComponent<RectTransform>().sizeDelta = newSize;
 
         inputField.text = "";
-        AddToConsole(string.Format("(user)@(pc):{0} ", cd));
+        AddToConsole(string.Format("\n{0}@{1}: {2} ", levelManager.user, levelManager.pcName, cd.GetPath()));
 
         controls.UI.Enable();
         controls.Player.Disable();
