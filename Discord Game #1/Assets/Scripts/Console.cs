@@ -71,7 +71,7 @@ public class Console : MonoBehaviour
 
     public void OnEdit(string str)
     {
-        if(!str.Contains(consoleHistory))
+        if(!str.StartsWith(consoleHistory))
         {
             inputField.text = consoleHistory;
             inputField.caretPosition++;
