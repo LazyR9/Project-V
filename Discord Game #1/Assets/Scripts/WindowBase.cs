@@ -180,6 +180,12 @@ public class WindowBase : MonoBehaviour
 			bottomRightWindowBorder.gameObject.name = "BottomRightWindowBorder";
 		}
 	}
+	void OnEnable()
+	{
+		screenSize = new Vector2(Screen.width, Screen.height);
+		maxWidth = Screen.width - 100;
+		maxHeight = Screen.height - 100;
+	}
 	void Update()
 	{
 		if (screenSize != new Vector2(Screen.width, Screen.height))
