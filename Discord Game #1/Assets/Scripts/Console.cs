@@ -37,26 +37,32 @@ public class Console : MonoBehaviour
     {
         string output;
 
-        string command = input.Split(' ')[0];
-        List<string> args = new List<string>(input.Split(' '));
-        args.RemoveAt(0);
+        if (input == "")
+        {
+            output = "";
+        }
+        else
+        {
+            string command = input.Split(' ')[0];
+            List<string> args = new List<string>(input.Split(' '));
+            args.RemoveAt(0);
 
-        Commands commands = new Commands(this);
-        string commandName = command.First().ToString().ToUpper() + command.Substring(1);
-        MethodInfo commandMethod = commands.GetType().GetMethod(commandName);
-        consoleHistory += input;
-        AddToConsole("\n");
+            Commands commands = new Commands(this);
+            string commandName = command.First().ToString().ToUpper() + command.Substring(1);
+            MethodInfo commandMethod = commands.GetType().GetMethod(commandName);
+            consoleHistory += input;
+            AddToConsole("\n");
         
-        try
-        {
-            output = (string)commandMethod.Invoke(commands, new object[1]{args.ToArray()});
+            try
+            {
+                output = (string)commandMethod.Invoke(commands, new object[1]{args.ToArray()});
+            }
+            catch
+            {
+                output = "Unknow command: " + commandName.ToLower();
+                output += "\nPlease type \"help\" for a list of commands.";
+            }
         }
-        catch
-        {
-            output = "Unknow command: " + commandName.ToLower();
-            output += "\nPlease type \"help\" for a list of commands.";
-        }
-
         AddToConsole(output);
         AddToConsole(string.Format("\n{0}@{1}: {2} ", levelManager.user, levelManager.pcName, cd.GetPath()));
     }
