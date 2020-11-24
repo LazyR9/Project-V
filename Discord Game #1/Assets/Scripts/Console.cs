@@ -63,10 +63,10 @@ public class Console : MonoBehaviour
 
     private void AddToConsole(string message)
     {
-        inputField.caretPosition = inputField.text.Length;
-
         inputField.text += message;
         consoleHistory += message;
+
+        inputField.MoveTextEnd(false);
     }
 
     public void OnEdit(string str)
@@ -74,7 +74,7 @@ public class Console : MonoBehaviour
         if(!str.StartsWith(consoleHistory))
         {
             inputField.text = consoleHistory;
-            inputField.caretPosition++;
+            inputField.MoveTextEnd(false);
         }
     }
 
