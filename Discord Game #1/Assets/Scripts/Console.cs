@@ -101,7 +101,7 @@ public class Console : MonoBehaviour
         GetComponent<RectTransform>().sizeDelta = newSize;
 
         inputField.text = "";
-        AddToConsole(string.Format("\n{0}@{1}: {2} ", levelManager.user, levelManager.pcName, cd.GetPath()));
+        AddToConsole(string.Format("{0}@{1}: {2} ", levelManager.user, levelManager.pcName, cd.GetPath()));
 
         controls.UI.Enable();
         controls.Player.Disable();
