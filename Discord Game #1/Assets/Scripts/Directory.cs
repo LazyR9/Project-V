@@ -11,7 +11,7 @@ public class Directory : MonoBehaviour
     {
         if (parentDirectory == null)
         {
-            return null;
+            return "\\" + name;
         }
         return parentDirectory.GetPath() + "\\" + name;
     }
