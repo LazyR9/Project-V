@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0777b07e8fc06a04ba2a05fc57263d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cd: 
+  cd: {fileID: 0}
   gameManager: {fileID: 203135037}
 --- !u!114 &938872286
 MonoBehaviour:
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: f63a6e9e1cf66a34491d681c1ce48e88, type: 2}
-  m_OnFocusSelectAll: 1
+  m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
@@ -1876,7 +1876,6 @@ MonoBehaviour:
   controller: {fileID: 1454350200}
   runSpeed: 40
   animator: {fileID: 1454350207}
-  console: {fileID: 938872278}
   gameManager: {fileID: 203135037}
 --- !u!95 &1454350207
 Animator:
