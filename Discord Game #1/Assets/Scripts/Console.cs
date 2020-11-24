@@ -58,7 +58,7 @@ public class Console : MonoBehaviour
         }
 
         AddToConsole(output);
-        AddToConsole(string.Format("\n{0}@({1}: {2} ", levelManager.user, levelManager.pcName, cd));
+        AddToConsole(string.Format("\n{0}@{1}: {2} ", levelManager.user, levelManager.pcName, cd.GetPath()));
     }
 
     private void AddToConsole(string message)
